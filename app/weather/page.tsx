@@ -276,7 +276,7 @@ export default function WeatherPage() {
                       />
                       <button
                         onClick={searchLocation}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition-all duration-300"
+                        className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-xl transition-all duration-300"
                         title="Search Location"
                       >
                         <Search className="w-5 h-5" />
@@ -291,7 +291,7 @@ export default function WeatherPage() {
                     </label>
                     <button
                       onClick={getUserLocation}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl transition-all duration-300 flex items-center justify-center"
+                      className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-xl transition-all duration-300 flex items-center justify-center"
                       title="Detect My Location"
                     >
                       <Navigation className="w-5 h-5" />
