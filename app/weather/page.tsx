@@ -239,9 +239,9 @@ export default function WeatherPage() {
             ) : (
               <div className="space-y-8">
                 {/* City Selection Controls */}
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="space-y-4">
                   {/* Quick City Selection */}
-                  <div className="md:col-span-1">
+                  <div>
                     <label className="block text-white font-semibold mb-2">
                       <MapPin className="inline-block w-4 h-4 mr-2" />
                       Quick Select City
@@ -261,11 +261,11 @@ export default function WeatherPage() {
                   </div>
 
                   {/* Manual City Search */}
-                  <div className="md:col-span-1">
+                  <div>
                     <label className="block text-white font-semibold mb-2">
-                      Or Search City
+                      Or Search Any City
                     </label>
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-3">
                       <input
                         type="text"
                         placeholder="e.g., Antalya, Turkey"
@@ -276,26 +276,19 @@ export default function WeatherPage() {
                       />
                       <button
                         onClick={searchLocation}
-                        className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-xl transition-all duration-300"
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-xl transition-all duration-300 flex items-center"
                         title="Search Location"
                       >
                         <Search className="w-5 h-5" />
                       </button>
+                      <button
+                        onClick={getUserLocation}
+                        className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-xl transition-all duration-300 flex items-center"
+                        title="Use My Location"
+                      >
+                        <Navigation className="w-5 h-5" />
+                      </button>
                     </div>
-                  </div>
-
-                  {/* Geolocation Button */}
-                  <div className="md:col-span-1">
-                    <label className="block text-white font-semibold mb-2">
-                      Use My Location
-                    </label>
-                    <button
-                      onClick={getUserLocation}
-                      className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-xl transition-all duration-300 flex items-center justify-center"
-                      title="Detect My Location"
-                    >
-                      <Navigation className="w-5 h-5" />
-                    </button>
                   </div>
                 </div>
 
