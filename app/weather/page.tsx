@@ -112,27 +112,51 @@ export default function WeatherPage() {
 
   const fetchWeatherData = async (lat: number, lon: number) => {
     try {
-      // Fallback to weather service that doesn't require API key
+      setError('')
+      console.log(`Fetching weather for coordinates: ${lat}, ${lon}`)
+      
+      // Try wttr.in API first
       const fallbackUrl = `https://wttr.in/${lat},${lon}?format=j1`
       
-      const fallbackResponse = await fetch(fallbackUrl)
+      const fallbackResponse = await fetch(fallbackUrl, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+        mode: 'cors'
+      })
+      
+      if (!fallbackResponse.ok) {
+        throw new Error(`HTTP error! status: ${fallbackResponse.status}`)
+      }
+      
       const fallbackData = await fallbackResponse.json()
+      console.log('Weather API response:', fallbackData)
+      
+      // Validate response structure
+      if (!fallbackData.current_condition || !fallbackData.current_condition[0]) {
+        throw new Error('Invalid weather data structure')
+      }
+      
+      if (!fallbackData.nearest_area || !fallbackData.nearest_area[0]) {
+        throw new Error('Invalid location data structure')
+      }
       
       const current = fallbackData.current_condition[0]
       const nearest = fallbackData.nearest_area[0]
       
       const weatherData: WeatherData = {
-        location: nearest.areaName[0].value,
-        country: nearest.country[0].value,
-        temperature: parseInt(current.temp_C),
-        description: current.weatherDesc[0].value,
+        location: nearest.areaName?.[0]?.value || 'Unknown Location',
+        country: nearest.country?.[0]?.value || 'Unknown Country',
+        temperature: parseInt(current.temp_C) || 0,
+        description: current.weatherDesc?.[0]?.value || 'Unknown',
         icon: '01d',
-        humidity: parseInt(current.humidity),
-        windSpeed: parseInt(current.windspeedKmph),
-        windDirection: parseInt(current.winddirDegree),
-        visibility: parseInt(current.visibility),
-        feelsLike: parseInt(current.FeelsLikeC),
-        pressure: parseInt(current.pressure),
+        humidity: parseInt(current.humidity) || 0,
+        windSpeed: parseInt(current.windspeedKmph) || 0,
+        windDirection: parseInt(current.winddirDegree) || 0,
+        visibility: parseInt(current.visibility) || 0,
+        feelsLike: parseInt(current.FeelsLikeC) || 0,
+        pressure: parseInt(current.pressure) || 0,
         uvIndex: parseInt(current.uvIndex || '0'),
         sunrise: '06:30',
         sunset: '19:30',
@@ -143,13 +167,16 @@ export default function WeatherPage() {
       setLocation({
         latitude: lat,
         longitude: lon,
-        city: nearest.areaName[0].value,
-        country: nearest.country[0].value
+        city: nearest.areaName?.[0]?.value || 'Unknown Location',
+        country: nearest.country?.[0]?.value || 'Unknown Country'
       })
       
       setLoading(false)
+      console.log('Weather data successfully processed:', weatherData)
+      
     } catch (err) {
-      setError('Failed to fetch weather data')
+      console.error('Weather fetch error:', err)
+      setError(`Failed to fetch weather data: ${err instanceof Error ? err.message : 'Unknown error'}`)
       setLoading(false)
     }
   }
@@ -161,22 +188,38 @@ export default function WeatherPage() {
     setError('')
     
     try {
-      // Use OpenStreetMap Nominatim for geocoding (free, no API key required)
-      const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(manualLocation)}&limit=1`
+      console.log(`Searching for location: ${manualLocation}`)
       
-      const response = await fetch(geocodeUrl)
+      // Use OpenStreetMap Nominatim for geocoding (free, no API key required)
+      const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(manualLocation)}&limit=1&addressdetails=1`
+      
+      const response = await fetch(geocodeUrl, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'User-Agent': 'UltimateCalculatorSuite/1.0'
+        }
+      })
+      
+      if (!response.ok) {
+        throw new Error(`Geocoding error! status: ${response.status}`)
+      }
+      
       const data = await response.json()
+      console.log('Geocoding response:', data)
       
       if (data && data.length > 0) {
         const lat = parseFloat(data[0].lat)
         const lon = parseFloat(data[0].lon)
+        console.log(`Found coordinates: ${lat}, ${lon}`)
         await fetchWeatherData(lat, lon)
       } else {
         setError('Location not found. Please try a different city name.')
         setLoading(false)
       }
     } catch (err) {
-      setError('Failed to find location. Please try again.')
+      console.error('Location search error:', err)
+      setError(`Failed to find location: ${err instanceof Error ? err.message : 'Please try again.'}`)
       setLoading(false)
     }
   }
