@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, Clock, ArrowLeft, User, Timer, Cloud, MapPin } from 'lucide-react'
+import { Calendar, Clock, ArrowLeft, User, Timer } from 'lucide-react'
+import AppNavigation from '../components/AppNavigation'
 
 interface AgeResult {
   years: number
@@ -216,36 +217,7 @@ export default function AgeCalculator() {
               )}
 
               {/* Navigation Links */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Link
-                  href="/"
-                  className="text-center bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-                >
-                  <Clock className="inline-block w-4 h-4 mr-1" />
-                  Minutes
-                </Link>
-                <Link
-                  href="/death-counter"
-                  className="text-center bg-gradient-to-r from-red-600 to-gray-800 hover:from-red-700 hover:to-gray-900 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-                >
-                  <Timer className="inline-block w-4 h-4 mr-1" />
-                  Deaths
-                </Link>
-                <Link
-                  href="/weather"
-                  className="text-center bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-                >
-                  <Cloud className="inline-block w-4 h-4 mr-1" />
-                  Weather
-                </Link>
-                <Link
-                  href="/maps"
-                  className="text-center bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-                >
-                  <MapPin className="inline-block w-4 h-4 mr-1" />
-                  Maps
-                </Link>
-              </div>
+              <AppNavigation currentPage="/age-calculator" layout="grid-5" />
             </div>
           </div>
 

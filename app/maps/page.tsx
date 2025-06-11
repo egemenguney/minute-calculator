@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { 
-  MapPin, ArrowLeft, Clock, Calendar, Skull, Cloud, Navigation,
-  Search, Globe, Compass, AlertCircle, RefreshCw, Camera, Map
+  MapPin, ArrowLeft, Search, Globe, Compass, AlertCircle, RefreshCw, Camera, Map
 } from 'lucide-react'
+import AppNavigation from '../components/AppNavigation'
 
 // Declare Google Maps types
 declare global {
@@ -442,43 +442,7 @@ export default function MapsPage() {
         </div>
 
         {/* Navigation Links */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-6">
-          <Link
-            href="/"
-            className="text-center bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            <Clock className="inline-block w-4 h-4 mr-1" />
-            Minutes
-          </Link>
-          <Link
-            href="/age-calculator"
-            className="text-center bg-gradient-to-r from-purple-600 to-pink-700 hover:from-purple-700 hover:to-pink-800 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            <Calendar className="inline-block w-4 h-4 mr-1" />
-            Age
-          </Link>
-          <Link
-            href="/death-counter"
-            className="text-center bg-gradient-to-r from-red-600 to-gray-800 hover:from-red-700 hover:to-gray-900 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            <Skull className="inline-block w-4 h-4 mr-1" />
-            Deaths
-          </Link>
-          <Link
-            href="/weather"
-            className="text-center bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-700 hover:to-blue-800 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            <Cloud className="inline-block w-4 h-4 mr-1" />
-            Weather
-          </Link>
-          <Link
-            href="/mobese"
-            className="text-center bg-gradient-to-r from-gray-600 to-slate-800 hover:from-gray-700 hover:to-slate-900 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            <Navigation className="inline-block w-4 h-4 mr-1" />
-            MOBESE
-          </Link>
-        </div>
+        <AppNavigation currentPage="/maps" layout="grid-5" className="mt-6" />
 
         {/* Footer */}
         <div className="text-center mt-6 text-green-100 animate-fade-in">

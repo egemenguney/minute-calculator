@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { 
   Cloud, Sun, CloudRain, CloudSnow, MapPin, ArrowLeft, 
-  Clock, Calendar, Skull, Thermometer, Eye, Wind, Droplets, 
+  Clock, Thermometer, Eye, Wind, Droplets, 
   Compass, Sunrise, Sunset, RefreshCw, AlertCircle, Navigation
 } from 'lucide-react'
+import AppNavigation from '../components/AppNavigation'
 
 interface WeatherData {
   location: string
@@ -400,36 +401,7 @@ export default function WeatherPage() {
             )}
 
             {/* Navigation Links */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-              <Link
-                href="/"
-                className="text-center bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                <Clock className="inline-block w-4 h-4 mr-1" />
-                Minutes
-              </Link>
-              <Link
-                href="/age-calculator"
-                className="text-center bg-gradient-to-r from-purple-600 to-pink-700 hover:from-purple-700 hover:to-pink-800 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                <Calendar className="inline-block w-4 h-4 mr-1" />
-                Age
-              </Link>
-              <Link
-                href="/death-counter"
-                className="text-center bg-gradient-to-r from-red-600 to-gray-800 hover:from-red-700 hover:to-gray-900 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                <Skull className="inline-block w-4 h-4 mr-1" />
-                Deaths
-              </Link>
-              <Link
-                href="/mobese"
-                className="text-center bg-gradient-to-r from-gray-600 to-slate-800 hover:from-gray-700 hover:to-slate-900 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                <Navigation className="inline-block w-4 h-4 mr-1" />
-                MOBESE
-              </Link>
-            </div>
+            <AppNavigation currentPage="/weather" layout="grid-5" className="mt-8" />
           </div>
 
           {/* Footer */}

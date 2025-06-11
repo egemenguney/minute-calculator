@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Skull, ArrowLeft, Clock, TrendingUp, Globe, AlertTriangle } from 'lucide-react'
+import { Skull, ArrowLeft, Clock, AlertTriangle } from 'lucide-react'
+import AppNavigation from '../components/AppNavigation'
 
 interface DeathStats {
   totalDeaths: number
@@ -214,22 +215,7 @@ export default function DeathCounter() {
                 </div>
 
                 {/* Navigation Links */}
-                <div className="grid grid-cols-2 gap-4">
-                  <Link
-                    href="/"
-                    className="text-center bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-                  >
-                    <Clock className="inline-block w-5 h-5 mr-2" />
-                    Minute Calculator
-                  </Link>
-                  <Link
-                    href="/age-calculator"
-                    className="text-center bg-gradient-to-r from-purple-600 to-pink-700 hover:from-purple-700 hover:to-pink-800 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-                  >
-                    <TrendingUp className="inline-block w-5 h-5 mr-2" />
-                    Age Calculator
-                  </Link>
-                </div>
+                <AppNavigation currentPage="/death-counter" layout="grid-5" />
               </div>
             </div>
           </div>
