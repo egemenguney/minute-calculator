@@ -115,70 +115,165 @@ export default function WeatherPage() {
       setError('')
       console.log(`Fetching weather for coordinates: ${lat}, ${lon}`)
       
-      // Try wttr.in API first
-      const fallbackUrl = `https://wttr.in/${lat},${lon}?format=j1`
+      // Try multiple weather APIs in order
+      const weatherUrls = [
+        `https://wttr.in/${lat},${lon}?format=j1`,
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m&timezone=auto`,
+      ]
       
-      const fallbackResponse = await fetch(fallbackUrl, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-        },
-        mode: 'cors'
-      })
+      let weatherData: WeatherData | null = null
+      let lastError: Error | null = null
       
-      if (!fallbackResponse.ok) {
-        throw new Error(`HTTP error! status: ${fallbackResponse.status}`)
+      // Try wttr.in first
+      try {
+        const response = await fetch(weatherUrls[0], {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (compatible; UltimateCalculatorSuite/1.0)'
+          },
+          mode: 'cors'
+        })
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`)
+        }
+        
+        const text = await response.text()
+        console.log('Raw response:', text.substring(0, 200))
+        
+        // Check if response is JSON
+        if (!text.trim().startsWith('{')) {
+          throw new Error('Response is not JSON format')
+        }
+        
+        const data = JSON.parse(text)
+        console.log('Parsed weather data:', data)
+        
+        if (data.current_condition && data.current_condition[0] && data.nearest_area && data.nearest_area[0]) {
+          const current = data.current_condition[0]
+          const nearest = data.nearest_area[0]
+          
+          weatherData = {
+            location: nearest.areaName?.[0]?.value || 'Unknown Location',
+            country: nearest.country?.[0]?.value || 'Unknown Country',
+            temperature: parseInt(current.temp_C) || 0,
+            description: current.weatherDesc?.[0]?.value || 'Unknown',
+            icon: '01d',
+            humidity: parseInt(current.humidity) || 0,
+            windSpeed: parseInt(current.windspeedKmph) || 0,
+            windDirection: parseInt(current.winddirDegree) || 0,
+            visibility: parseInt(current.visibility) || 0,
+            feelsLike: parseInt(current.FeelsLikeC) || 0,
+            pressure: parseInt(current.pressure) || 0,
+            uvIndex: parseInt(current.uvIndex || '0'),
+            sunrise: '06:30',
+            sunset: '19:30',
+            lastUpdated: new Date().toLocaleTimeString()
+          }
+        }
+      } catch (err) {
+        console.warn('wttr.in failed:', err)
+        lastError = err instanceof Error ? err : new Error('wttr.in API failed')
       }
       
-      const fallbackData = await fallbackResponse.json()
-      console.log('Weather API response:', fallbackData)
-      
-      // Validate response structure
-      if (!fallbackData.current_condition || !fallbackData.current_condition[0]) {
-        throw new Error('Invalid weather data structure')
+      // If wttr.in failed, try Open-Meteo API
+      if (!weatherData) {
+        try {
+          console.log('Trying Open-Meteo API...')
+          const response = await fetch(weatherUrls[1])
+          
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`)
+          }
+          
+          const data = await response.json()
+          console.log('Open-Meteo response:', data)
+          
+          if (data.current_weather) {
+            const current = data.current_weather
+            
+            // Get location name from reverse geocoding
+            let locationName = 'Unknown Location'
+            let countryName = 'Unknown Country'
+            
+            try {
+              const geoResponse = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1`)
+              const geoData = await geoResponse.json()
+              locationName = geoData.address?.city || geoData.address?.town || geoData.address?.village || geoData.display_name?.split(',')[0] || 'Unknown Location'
+              countryName = geoData.address?.country || 'Unknown Country'
+            } catch (e) {
+              console.warn('Reverse geocoding failed:', e)
+            }
+            
+            weatherData = {
+              location: locationName,
+              country: countryName,
+              temperature: Math.round(current.temperature || 0),
+              description: getWeatherDescription(current.weathercode || 0),
+              icon: '01d',
+              humidity: data.hourly?.relative_humidity_2m?.[0] || 0,
+              windSpeed: Math.round(current.windspeed || 0),
+              windDirection: current.winddirection || 0,
+              visibility: 10,
+              feelsLike: Math.round(current.temperature || 0),
+              pressure: 1013,
+              uvIndex: 0,
+              sunrise: '06:30',
+              sunset: '19:30',
+              lastUpdated: new Date().toLocaleTimeString()
+            }
+          }
+        } catch (err) {
+          console.warn('Open-Meteo failed:', err)
+          lastError = err instanceof Error ? err : new Error('Open-Meteo API failed')
+        }
       }
       
-      if (!fallbackData.nearest_area || !fallbackData.nearest_area[0]) {
-        throw new Error('Invalid location data structure')
+      if (weatherData) {
+        setWeather(weatherData)
+        setLocation({
+          latitude: lat,
+          longitude: lon,
+          city: weatherData.location,
+          country: weatherData.country
+        })
+        setLoading(false)
+        console.log('Weather data successfully processed:', weatherData)
+      } else {
+        throw lastError || new Error('All weather APIs failed')
       }
-      
-      const current = fallbackData.current_condition[0]
-      const nearest = fallbackData.nearest_area[0]
-      
-      const weatherData: WeatherData = {
-        location: nearest.areaName?.[0]?.value || 'Unknown Location',
-        country: nearest.country?.[0]?.value || 'Unknown Country',
-        temperature: parseInt(current.temp_C) || 0,
-        description: current.weatherDesc?.[0]?.value || 'Unknown',
-        icon: '01d',
-        humidity: parseInt(current.humidity) || 0,
-        windSpeed: parseInt(current.windspeedKmph) || 0,
-        windDirection: parseInt(current.winddirDegree) || 0,
-        visibility: parseInt(current.visibility) || 0,
-        feelsLike: parseInt(current.FeelsLikeC) || 0,
-        pressure: parseInt(current.pressure) || 0,
-        uvIndex: parseInt(current.uvIndex || '0'),
-        sunrise: '06:30',
-        sunset: '19:30',
-        lastUpdated: new Date().toLocaleTimeString()
-      }
-
-      setWeather(weatherData)
-      setLocation({
-        latitude: lat,
-        longitude: lon,
-        city: nearest.areaName?.[0]?.value || 'Unknown Location',
-        country: nearest.country?.[0]?.value || 'Unknown Country'
-      })
-      
-      setLoading(false)
-      console.log('Weather data successfully processed:', weatherData)
       
     } catch (err) {
       console.error('Weather fetch error:', err)
-      setError(`Failed to fetch weather data: ${err instanceof Error ? err.message : 'Unknown error'}`)
+      setError(`Failed to fetch weather data: ${err instanceof Error ? err.message : 'All weather services unavailable'}`)
       setLoading(false)
     }
+  }
+  
+  // Helper function to convert weather codes to descriptions
+  const getWeatherDescription = (code: number): string => {
+    const weatherCodes: { [key: number]: string } = {
+      0: 'Clear sky',
+      1: 'Mainly clear',
+      2: 'Partly cloudy',
+      3: 'Overcast',
+      45: 'Fog',
+      48: 'Depositing rime fog',
+      51: 'Light drizzle',
+      53: 'Moderate drizzle',
+      55: 'Dense drizzle',
+      61: 'Slight rain',
+      63: 'Moderate rain',
+      65: 'Heavy rain',
+      71: 'Slight snow',
+      73: 'Moderate snow',
+      75: 'Heavy snow',
+      95: 'Thunderstorm',
+      96: 'Thunderstorm with hail',
+      99: 'Thunderstorm with heavy hail'
+    }
+    return weatherCodes[code] || 'Unknown weather'
   }
 
   const searchLocation = async () => {
