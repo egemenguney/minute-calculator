@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { 
   Cloud, Sun, CloudRain, CloudSnow, MapPin, ArrowLeft, 
   Clock, Thermometer, Eye, Wind, Droplets, 
-  Compass, Sunrise, Sunset, RefreshCw, AlertCircle, Navigation
+  Compass, Sunrise, Sunset, RefreshCw, AlertCircle, Navigation, Search
 } from 'lucide-react'
 import AppNavigation from '../components/AppNavigation'
 
@@ -277,8 +277,9 @@ export default function WeatherPage() {
                       <button
                         onClick={searchLocation}
                         className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition-all duration-300"
+                        title="Search Location"
                       >
-                        Search
+                        <Search className="w-5 h-5" />
                       </button>
                     </div>
                   </div>
@@ -291,9 +292,9 @@ export default function WeatherPage() {
                     <button
                       onClick={getUserLocation}
                       className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl transition-all duration-300 flex items-center justify-center"
+                      title="Detect My Location"
                     >
-                      <Navigation className="w-4 h-4 mr-2" />
-                      Detect Location
+                      <Navigation className="w-5 h-5" />
                     </button>
                   </div>
                 </div>
