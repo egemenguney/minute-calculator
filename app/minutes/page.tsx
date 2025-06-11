@@ -90,10 +90,10 @@ export default function MinuteCalculator() {
   }, [startTime, startPeriod, endTime, endPeriod])
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-blue-400 via-purple-500 to-blue-600">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-800 via-indigo-900 to-slate-900">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20" />
-      <div className="absolute inset-0 bg-[url('/images/gradient-bg.webp')] bg-cover bg-center opacity-30" />
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-800/20 to-slate-800/20" />
+      <div className="absolute inset-0 bg-[url('/images/gradient-bg.webp')] bg-cover bg-center opacity-10" />
 
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">

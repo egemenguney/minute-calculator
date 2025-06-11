@@ -78,9 +78,9 @@ export default function DeathCounter() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-800 via-red-900 to-black">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-stone-900 via-zinc-900 to-neutral-900">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-red-900/30 to-gray-900/30" />
+      <div className="absolute inset-0 bg-gradient-to-br from-stone-800/20 to-zinc-800/20" />
       <div className="absolute inset-0 bg-[url('/images/gradient-bg.webp')] bg-cover bg-center opacity-10" />
 
       {/* Main Content */}
@@ -96,13 +96,13 @@ export default function DeathCounter() {
                 <ArrowLeft className="w-6 h-6 text-white" />
               </Link>
               <div className="relative w-16 h-16 mr-4">
-                <Skull className="w-16 h-16 text-red-400" />
+                <Skull className="w-16 h-16 text-rose-300" />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-white">
                 Global Death Counter
               </h1>
             </div>
-            <p className="text-xl text-red-200">
+            <p className="text-xl text-stone-300">
               Estimated deaths worldwide since your selected time
             </p>
             <div className="mt-4 flex items-center justify-center space-x-2 text-yellow-200">
@@ -112,7 +112,7 @@ export default function DeathCounter() {
           </div>
 
           {/* Calculator Card */}
-          <div className="glass rounded-3xl p-8 shadow-2xl animate-slide-up border border-red-500/20">
+          <div className="glass rounded-3xl p-8 shadow-2xl animate-slide-up border border-rose-400/20">
             <div className="space-y-8">
               {/* Start Time Input */}
               <div className="text-center space-y-4">
@@ -141,11 +141,11 @@ export default function DeathCounter() {
               {deathStats && (
                 <div className="space-y-6">
                   {/* Main Counter */}
-                  <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-red-900/30 to-black/30 backdrop-blur-sm border border-red-500/30">
-                    <div className="text-6xl md:text-8xl font-bold text-red-400 mb-4 font-mono">
+                  <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-stone-800/30 to-zinc-800/30 backdrop-blur-sm border border-rose-400/30">
+                    <div className="text-6xl md:text-8xl font-bold text-rose-300 mb-4 font-mono">
                       {deathStats.totalDeaths.toLocaleString()}
                     </div>
-                    <div className="text-2xl text-red-200">
+                    <div className="text-2xl text-stone-200">
                       Estimated Deaths
                     </div>
                     <div className="text-lg text-gray-300 mt-2">

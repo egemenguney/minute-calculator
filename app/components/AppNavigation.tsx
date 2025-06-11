@@ -18,31 +18,31 @@ export default function AppNavigation({
       href: '/minutes',
       icon: Clock,
       label: 'Minutes',
-      gradient: 'from-blue-500 to-purple-600'
+      gradient: 'from-slate-600 to-indigo-700'
     },
     {
       href: '/age-calculator',
       icon: Calendar,
       label: 'Age',
-      gradient: 'from-purple-500 to-pink-600'
+      gradient: 'from-violet-600 to-purple-700'
     },
     {
       href: '/death-counter',
       icon: Skull,
       label: 'Deaths',
-      gradient: 'from-red-600 to-gray-800'
+      gradient: 'from-stone-600 to-zinc-700'
     },
     {
       href: '/weather',
       icon: Cloud,
       label: 'Weather',
-      gradient: 'from-sky-500 to-blue-600'
+      gradient: 'from-cyan-600 to-teal-700'
     },
     {
       href: '/maps',
       icon: Navigation,
       label: 'Maps',
-      gradient: 'from-green-500 to-teal-600'
+      gradient: 'from-emerald-600 to-teal-700'
     },
 
   ]

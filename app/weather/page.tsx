@@ -200,10 +200,10 @@ export default function WeatherPage() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-cyan-900 to-teal-900">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-indigo-900/20" />
-      <div className="absolute inset-0 bg-[url('/images/gradient-bg.webp')] bg-cover bg-center opacity-20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-800/20 to-teal-800/20" />
+      <div className="absolute inset-0 bg-[url('/images/gradient-bg.webp')] bg-cover bg-center opacity-10" />
 
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
@@ -224,13 +224,13 @@ export default function WeatherPage() {
                 Weather Forecast
               </h1>
             </div>
-            <p className="text-xl text-blue-100">
+            <p className="text-xl text-cyan-200">
               Real-time weather conditions for any location
             </p>
           </div>
 
           {/* Weather Card */}
-          <div className="glass rounded-3xl p-8 shadow-2xl animate-slide-up border border-blue-500/20">
+          <div className="glass rounded-3xl p-8 shadow-2xl animate-slide-up border border-cyan-400/20">
             {loading ? (
               <div className="text-center py-12">
                 <RefreshCw className="w-12 h-12 text-white animate-spin mx-auto mb-4" />

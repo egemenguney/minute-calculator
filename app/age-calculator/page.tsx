@@ -88,10 +88,10 @@ export default function AgeCalculator() {
   }, [birthDate])
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-purple-400 via-pink-500 to-red-500">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-violet-900 via-purple-900 to-slate-900">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-pink-900/20" />
-      <div className="absolute inset-0 bg-[url('/images/gradient-bg.webp')] bg-cover bg-center opacity-20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-violet-800/20 to-purple-800/20" />
+      <div className="absolute inset-0 bg-[url('/images/gradient-bg.webp')] bg-cover bg-center opacity-10" />
 
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
@@ -112,7 +112,7 @@ export default function AgeCalculator() {
                 Age Calculator
               </h1>
             </div>
-            <p className="text-xl text-pink-100">
+            <p className="text-xl text-violet-200">
               Calculate your exact age with live updates
             </p>
           </div>
@@ -144,37 +144,37 @@ export default function AgeCalculator() {
                       <div className="text-3xl font-bold text-white animate-pulse-slow">
                         {ageResult.years}
                       </div>
-                      <div className="text-pink-100 text-sm">Years</div>
+                      <div className="text-violet-200 text-sm">Years</div>
                     </div>
                     <div className="p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-center">
                       <div className="text-3xl font-bold text-white animate-pulse-slow">
                         {ageResult.months}
                       </div>
-                      <div className="text-pink-100 text-sm">Months</div>
+                      <div className="text-violet-200 text-sm">Months</div>
                     </div>
                     <div className="p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-center">
                       <div className="text-3xl font-bold text-white animate-pulse-slow">
                         {ageResult.days}
                       </div>
-                      <div className="text-pink-100 text-sm">Days</div>
+                      <div className="text-violet-200 text-sm">Days</div>
                     </div>
                     <div className="p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-center">
                       <div className="text-3xl font-bold text-white animate-pulse-slow">
                         {ageResult.hours}
                       </div>
-                      <div className="text-pink-100 text-sm">Hours</div>
+                      <div className="text-violet-200 text-sm">Hours</div>
                     </div>
                     <div className="p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-center">
                       <div className="text-3xl font-bold text-white animate-pulse-slow">
                         {ageResult.minutes}
                       </div>
-                      <div className="text-pink-100 text-sm">Minutes</div>
+                      <div className="text-violet-200 text-sm">Minutes</div>
                     </div>
                     <div className="p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-center">
                       <div className="text-3xl font-bold text-white animate-pulse-slow">
                         {ageResult.seconds}
                       </div>
-                      <div className="text-pink-100 text-sm">Seconds</div>
+                      <div className="text-violet-200 text-sm">Seconds</div>
                     </div>
                   </div>
 
@@ -184,25 +184,25 @@ export default function AgeCalculator() {
                       <div className="text-2xl font-bold text-white mb-2">
                         {ageResult.totalDays.toLocaleString()}
                       </div>
-                      <div className="text-pink-100">Total Days</div>
+                      <div className="text-violet-200">Total Days</div>
                     </div>
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-pink-500/20 to-red-500/20 backdrop-blur-sm border border-white/20 text-center">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-800/20 to-violet-800/20 backdrop-blur-sm border border-white/20 text-center">
                       <div className="text-2xl font-bold text-white mb-2">
                         {ageResult.totalHours.toLocaleString()}
                       </div>
-                      <div className="text-pink-100">Total Hours</div>
+                      <div className="text-violet-200">Total Hours</div>
                     </div>
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-red-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20 text-center">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-violet-800/20 to-purple-800/20 backdrop-blur-sm border border-white/20 text-center">
                       <div className="text-2xl font-bold text-white mb-2">
                         {ageResult.totalMinutes.toLocaleString()}
                       </div>
-                      <div className="text-pink-100">Total Minutes</div>
+                      <div className="text-violet-200">Total Minutes</div>
                     </div>
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-sm border border-white/20 text-center">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-800/20 to-violet-800/20 backdrop-blur-sm border border-white/20 text-center">
                       <div className="text-2xl font-bold text-white mb-2">
                         {ageResult.totalSeconds.toLocaleString()}
                       </div>
-                      <div className="text-pink-100">Total Seconds</div>
+                      <div className="text-violet-200">Total Seconds</div>
                     </div>
                   </div>
 
@@ -222,7 +222,7 @@ export default function AgeCalculator() {
           </div>
 
           {/* Footer */}
-          <div className="text-center mt-8 text-pink-100 animate-fade-in">
+          <div className="text-center mt-8 text-violet-200 animate-fade-in">
             <p>Watch your age increase in real-time - every second counts!</p>
           </div>
         </div>

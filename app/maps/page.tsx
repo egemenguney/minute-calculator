@@ -266,10 +266,10 @@ export default function MapsPage() {
   }, [typingTimeout])
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-green-400 via-teal-500 to-blue-600">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 to-blue-900/20" />
-      <div className="absolute inset-0 bg-[url('/images/gradient-bg.webp')] bg-cover bg-center opacity-20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-emerald-800/20 to-teal-800/20" />
+      <div className="absolute inset-0 bg-[url('/images/gradient-bg.webp')] bg-cover bg-center opacity-10" />
 
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex flex-col p-4">
@@ -289,7 +289,7 @@ export default function MapsPage() {
               Instant Street View
             </h1>
           </div>
-          <p className="text-xl text-green-100">
+          <p className="text-xl text-emerald-200">
             Type any location and instantly view it in Google Street View
           </p>
         </div>
@@ -354,13 +354,13 @@ export default function MapsPage() {
         </div>
 
         {/* Street View Container */}
-        <div className="flex-1 glass rounded-3xl p-6 shadow-2xl animate-slide-up border border-green-500/20 min-h-[700px]">
+        <div className="flex-1 glass rounded-3xl p-6 shadow-2xl animate-slide-up border border-emerald-400/20 min-h-[700px]">
           {isLoading ? (
             <div className="h-full flex items-center justify-center">
               <div className="text-center">
                 <RefreshCw className="w-16 h-16 text-white animate-spin mx-auto mb-4" />
                 <p className="text-white text-xl">Loading Street View...</p>
-                <p className="text-green-200 text-sm mt-2">Searching for: {searchQuery || currentLocation}</p>
+                <p className="text-emerald-200 text-sm mt-2">Searching for: {searchQuery || currentLocation}</p>
               </div>
             </div>
           ) : (
@@ -445,9 +445,9 @@ export default function MapsPage() {
         <AppNavigation currentPage="/maps" layout="grid-5" className="mt-6" />
 
         {/* Footer */}
-        <div className="text-center mt-6 text-green-100 animate-fade-in">
+        <div className="text-center mt-6 text-emerald-200 animate-fade-in">
           <p>Powered by Google Street View • Instant location search • Global exploration</p>
-          <p className="text-sm mt-1">Inspired by <a href="https://www.instantstreetview.com/" target="_blank" rel="noopener noreferrer" className="text-green-200 hover:text-white underline">Instant Street View</a></p>
+          <p className="text-sm mt-1">Inspired by <a href="https://www.instantstreetview.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-300 hover:text-white underline">Instant Street View</a></p>
         </div>
       </div>
     </div>

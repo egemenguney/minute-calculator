@@ -50,10 +50,10 @@ export default function LandingPage() {
   ]
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-gray-800 to-stone-900">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 to-pink-900/20" />
-      <div className="absolute inset-0 bg-[url('/images/gradient-bg.webp')] bg-cover bg-center opacity-20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-800/30 to-stone-800/30" />
+      <div className="absolute inset-0 bg-[url('/images/gradient-bg.webp')] bg-cover bg-center opacity-10" />
 
       {/* Main Content */}
       <div className="relative z-10 min-h-screen p-4">
